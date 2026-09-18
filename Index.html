@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- 不希望搜索引擎收录 -->
+  <meta name="robots" content="noindex, nofollow, noarchive">
+
+  <title>for you ♡</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        radial-gradient(circle at 20% 15%, rgba(255,255,255,.8), transparent 25%),
+        radial-gradient(circle at 85% 80%, rgba(255,230,220,.45), transparent 30%),
+        #f5efe7;
+
+      color: #4b4540;
+      font-family: Georgia, "Times New Roman", serif;
+      padding: 24px;
+    }
+
+    .page {
+      width: min(420px, 100%);
+      text-align: center;
+    }
+
+    /* -----------------------
+       OPENING SCREEN
+    ------------------------ */
+
+    #intro {
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    #intro.hide {
+      opacity: 0;
+      transform: translateY(-15px);
+      pointer-events: none;
+    }
+
+    .tiny {
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: .55;
+      margin-bottom: 28px;
+    }
+
+    .envelope {
+      width: 230px;
+      height: 145px;
+      margin: 0 auto 35px;
+
+      position: relative;
+
+      background: #d9c7b5;
+      border-radius: 4px;
+
+      box-shadow:
+        0 18px 40px rgba(70, 50, 35, .15);
+    }
+
+    .envelope::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+
+      clip-path: polygon(0 0, 50% 55%, 100% 0);
+
+      background: #eadccf;
+    }
+
+    .heart {
+      position: absolute;
+      left: 50%;
+      top: 62%;
+
+      transform: translate(-50%, -50%);
+
+      width: 38px;
+      height: 38px;
+
+      border-radius: 50%;
+
+      background: #a36f69;
+      color: white;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 18px;
+
+      box-shadow: 0 4px 10px rgba(90, 50, 50, .2);
+    }
+
+    .open-button {
+      border: 0;
+      background: transparent;
+
+      font-family: inherit;
+      font-style: italic;
+      font-size: 17px;
+
+      color: #665b52;
+
+      cursor: pointer;
+
+      padding: 10px 20px;
+
+      transition: transform .2s ease;
+    }
+
+    .open-button:hover {
+      transform: translateY(-2px);
+    }
+
+
+    /* -----------------------
+       LETTER
+    ------------------------ */
+
+    #letter {
+      display: none;
+      opacity: 0;
+
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .paper {
+      position: relative;
+
+      background: rgba(255, 253, 248, .95);
+
+      padding: 46px 32px 35px;
+
+      border-radius: 3px;
+
+      box-shadow:
+        0 25px 60px rgba(80, 60, 40, .13);
+
+      transform: rotate(-.4deg);
+    }
+
+    .tape {
+      position: absolute;
+
+      width: 90px;
+      height: 28px;
+
+      top: -12px;
+      left: 50%;
+
+      transform: translateX(-50%) rotate(-3deg);
+
+      background: rgba(215, 196, 166, .5);
+
+      backdrop-filter: blur(2px);
+    }
+
+    .title {
+      font-size: 31px;
+      font-weight: normal;
+
+      margin: 4px 0 12px;
+
+      letter-spacing: -.5px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      font-style: italic;
+
+      opacity: .65;
+
+      margin-bottom: 36px;
+    }
+
+
+    /* -----------------------
+       PHOTO
+    ------------------------ */
+
+    .photo {
+      background: white;
+
+      padding: 10px 10px 30px;
+
+      width: 83%;
+
+      margin: 0 auto 35px;
+
+      transform: rotate(2deg);
+
+      box-shadow:
+        0 8px 20px rgba(60, 50, 40, .12);
+    }
+
+    .photo img {
+      width: 100%;
+      display: block;
+
+      aspect-ratio: 4 / 3;
+
+      object-fit: cover;
+    }
+
+    .photo-note {
+      margin-top: 13px;
+
+      font-size: 13px;
+      font-style: italic;
+
+      opacity: .65;
+    }
+
+
+    /* -----------------------
+       AUDIO PLAYER
+    ------------------------ */
+
+    .audio-card {
+      padding: 20px 18px;
+
+      background: #f3ece4;
+
+      border-radius: 18px;
+
+      margin-top: 15px;
+    }
+
+    .audio-label {
+      font-size: 11px;
+
+      letter-spacing: 2px;
+      text-transform: uppercase;
+
+      opacity: .5;
+
+      margin-bottom: 16px;
+    }
+
+    audio {
+      width: 100%;
+      height: 42px;
+    }
+
+
+    /* -----------------------
+       TEXT
+    ------------------------ */
+
+    .message {
+      font-size: 15px;
+      line-height: 1.8;
+
+      margin: 30px 5px 15px;
+
+      color: #5e554e;
+    }
+
+    .date {
+      margin-top: 36px;
+
+      font-size: 11px;
+
+      letter-spacing: 2px;
+
+      opacity: .45;
+    }
+
+    .signature {
+      font-size: 18px;
+      font-style: italic;
+
+      margin-top: 12px;
+
+      opacity: .8;
+    }
+
+
+    /* -----------------------
+       DECORATIONS
+    ------------------------ */
+
+    .star {
+      position: absolute;
+      opacity: .3;
+      font-size: 16px;
+    }
+
+    .star.one {
+      top: 65px;
+      right: 25px;
+      transform: rotate(15deg);
+    }
+
+    .star.two {
+      bottom: 80px;
+      left: 20px;
+      transform: rotate(-10deg);
+    }
+
+
+    /* -----------------------
+       MOBILE
+    ------------------------ */
+
+    @media (max-width: 450px) {
+
+      body {
+        padding: 18px;
+      }
+
+      .paper {
+        padding: 42px 22px 30px;
+      }
+
+      .title {
+        font-size: 28px;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <main class="page">
+
+    <!-- ====================
+         OPENING SCREEN
+    ===================== -->
+
+    <section id="intro">
+
+      <div class="tiny">
+        a little something
+      </div>
+
+      <div class="envelope">
+        <div class="heart">♡</div>
+      </div>
+
+      <button
+        class="open-button"
+        onclick="openLetter()"
+      >
+        open me
+      </button>
+
+    </section>
+
+
+
+    <!-- ====================
+         LETTER
+    ===================== -->
+
+    <section id="letter">
+
+      <div class="paper">
+
+        <div class="tape"></div>
+
+        <span class="star one">✦</span>
+        <span class="star two">♡</span>
+
+
+        <h1 class="title">
+          for you ♡
+        </h1>
+
+        <div class="subtitle">
+          listen when you miss me
+        </div>
+
+
+        <!-- 照片 -->
+        <div class="photo">
+
+          <img
+            src="photo.jpg"
+            alt="A memory of us"
+          >
+
+          <div class="photo-note">
+            one of my favorite moments
+          </div>
+
+        </div>
+
+
+        <!-- 录音 -->
+        <div class="audio-card">
+
+          <div class="audio-label">
+            a little voice letter
+          </div>
+
+          <audio
+            controls
+            preload="metadata"
+          >
+
+            <source
+              src="voice.mp3"
+              type="audio/mpeg"
+            >
+
+            Your browser does not support audio.
+
+          </audio>
+
+        </div>
+
+
+        <!-- 小文字 -->
+        <div class="message">
+
+          Keep this somewhere safe.<br>
+
+          And whenever you want to hear my voice,<br>
+
+          you know where to find me.
+
+        </div>
+
+
+        <div class="date">
+          SEPTEMBER · 2026
+        </div>
+
+
+        <div class="signature">
+          with love, always.
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <script>
+
+    function openLetter() {
+
+      const intro =
+        document.getElementById("intro");
+
+      const letter =
+        document.getElementById("letter");
+
+
+      intro.classList.add("hide");
+
+
+      setTimeout(() => {
+
+        intro.style.display = "none";
+
+        letter.style.display = "block";
+
+      }, 700);
+
+    }
+
+  </script>
+
+</body>
+</html>
